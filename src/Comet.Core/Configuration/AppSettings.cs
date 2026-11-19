@@ -126,6 +126,74 @@ public sealed record AppPaths(string ConfigDirectory, string ScriptsDirectory, s
         return new AppPaths(config, Path.Combine(config, "scripts"), logs);
     }
 
+    /// <summary>Environment variable naming a folder to use instead of the per-user locations.</summary>
+    public const string OverrideVariable = "COMET_CONFIG_DIR";
+
+    /// <summary>Command-line option naming that folder. It wins over the environment variable.</summary>
+    public const string OverrideOption = "--config-dir";
+
+    /// <summary>
+    /// Keeps settings, scripts and logs together under one folder. Used for a portable
+    /// setup, a second independent profile set, or a test run that must not touch real data.
+    /// </summary>
+    public static AppPaths InDirectory(string directory)
+    {
+        ArgumentException.ThrowIfNullOrWhiteSpace(directory);
+        string root = Path.GetFullPath(directory);
+        return new AppPaths(root, Path.Combine(root, "scripts"), Path.Combine(root, "logs"));
+    }
+
+    /// <summary>
+    /// Picks the folders for this run: <c>--config-dir &lt;folder&gt;</c> (or
+    /// <c>--config-dir=&lt;folder&gt;</c>) if given, else the COMET_CONFIG_DIR environment
+    /// variable, else the per-user defaults.
+    /// </summary>
+    /// <param name="arguments">The process command line, without the program name.</param>
+    /// <param name="environmentValue">The value of COMET_CONFIG_DIR, or null.</param>
+    /// <param name="warning">Set when an override was given but could not be used.</param>
+    public static AppPaths Resolve(IReadOnlyList<string> arguments, string? environmentValue, out string? warning)
+    {
+        ArgumentNullException.ThrowIfNull(arguments);
+        warning = null;
+        string? requested = null;
+        for (int i = 0; i < arguments.Count; i++)
+        {
+            string argument = arguments[i];
+            if (argument.Equals(OverrideOption, StringComparison.OrdinalIgnoreCase))
+            {
+                if (i + 1 >= arguments.Count)
+                {
+                    warning = $"{OverrideOption} needs a folder. The usual settings folder is in use.";
+                    return Default();
+                }
+                requested = arguments[i + 1];
+                break;
+            }
+            if (argument.StartsWith(OverrideOption + "=", StringComparison.OrdinalIgnoreCase))
+            {
+                requested = argument[(OverrideOption.Length + 1)..];
+                break;
+            }
+        }
+        requested ??= environmentValue;
+        if (string.IsNullOrWhiteSpace(requested))
+        {
+            return Default();
+        }
+
+        try
+        {
+            AppPaths paths = InDirectory(requested.Trim().Trim('"'));
+            Directory.CreateDirectory(paths.ConfigDirectory);
+            return paths;
+        }
+        catch (Exception ex) when (ex is IOException or UnauthorizedAccessException or ArgumentException or NotSupportedException)
+        {
+            warning = $"The settings folder \"{requested}\" cannot be used ({ex.Message}). The usual settings folder is in use.";
+            return Default();
+        }
+    }
+
     public string ScriptFileFor(SessionProfile profile)
     {
         ArgumentNullException.ThrowIfNull(profile);

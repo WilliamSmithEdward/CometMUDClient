@@ -110,6 +110,15 @@ words, and `{regex}` for a regular expression.
 
 Help > About shows the exact folders on your machine.
 
+To keep settings, scripts and logs together in a folder of your choice (a portable setup, a
+separate set of connections, or a test run that must not touch your real ones), start the
+app with `--config-dir <folder>` or set the `COMET_CONFIG_DIR` environment variable. The
+option wins if both are given.
+
+```bash
+dotnet run --project src/Comet.App -- --config-dir ./my-comet-data
+```
+
 Each saved connection has its own script file, written automatically when you change its
 aliases, actions or other items.
 

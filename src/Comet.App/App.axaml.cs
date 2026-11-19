@@ -7,15 +7,22 @@ namespace Comet.App;
 
 public sealed partial class App : Application
 {
+    /// <summary>The folders this run reads and writes. Set once at startup.</summary>
+    public static AppPaths Paths { get; private set; } = AppPaths.Default();
+
     public override void Initialize() => AvaloniaXamlLoader.Load(this);
 
     public override void OnFrameworkInitializationCompleted()
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            AppPaths paths = AppPaths.Default();
-            AppSettings settings = SettingsStore.Load(paths, out string? warning);
-            desktop.MainWindow = new MainWindow(settings, paths, warning);
+            Paths = AppPaths.Resolve(
+                desktop.Args ?? [],
+                Environment.GetEnvironmentVariable(AppPaths.OverrideVariable),
+                out string? pathWarning);
+            AppSettings settings = SettingsStore.Load(Paths, out string? settingsWarning);
+            string? warning = pathWarning is null ? settingsWarning : $"{pathWarning} {settingsWarning}".Trim();
+            desktop.MainWindow = new MainWindow(settings, Paths, warning);
         }
         base.OnFrameworkInitializationCompleted();
     }

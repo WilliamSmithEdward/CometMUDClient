@@ -18,7 +18,7 @@ public sealed class AboutDialog : Window
         WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
         string version = typeof(AboutDialog).Assembly.GetName().Version?.ToString(3) ?? "dev";
-        AppPaths paths = AppPaths.Default();
+        AppPaths paths = App.Paths;
 
         var close = new Button { Content = "Close", IsDefault = true, IsCancel = true, MinWidth = 88, HorizontalAlignment = HorizontalAlignment.Right, HorizontalContentAlignment = HorizontalAlignment.Center };
         close.Click += (_, _) => Close();
