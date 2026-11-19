@@ -1,0 +1,23 @@
+# Third-party client sources kept locally for reference only. Never committed.
+/source_to_reference/
+
+# Build output
+[Bb]in/
+[Oo]bj/
+artifacts/
+publish/
+TestResults/
+*.binlog
+
+# IDE and OS
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.DotSettings.user
+.DS_Store
+Thumbs.db
+
+# Local agent state
+.claude/
