@@ -1,0 +1,68 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Comet.App.Dialogs.ScriptDialog"
+        Title="Script Editor"
+        Width="940" Height="600" MinWidth="760" MinHeight="460"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+  <Grid Margin="16" ColumnDefinitions="190,12,280,12,*" RowDefinitions="*,Auto">
+
+    <!-- What kind of item -->
+    <DockPanel Grid.Column="0">
+      <TextBlock DockPanel.Dock="Top" Text="Type" FontWeight="SemiBold" Margin="0,0,0,8" />
+      <ListBox x:Name="KindList" AutomationProperties.Name="Script item type" />
+    </DockPanel>
+
+    <!-- The items of that kind -->
+    <DockPanel Grid.Column="2">
+      <TextBlock x:Name="ItemsHeading" DockPanel.Dock="Top" FontWeight="SemiBold" Margin="0,0,0,8" />
+      <TextBox x:Name="FilterBox" DockPanel.Dock="Top" PlaceholderText="Filter" Margin="0,0,0,8"
+               AutomationProperties.Name="Filter items" />
+      <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+        <Button x:Name="NewButton" Content="_New" MinWidth="72" HorizontalContentAlignment="Center" />
+        <Button x:Name="DeleteButton" Content="_Delete" MinWidth="72" HorizontalContentAlignment="Center" />
+      </StackPanel>
+      <Grid>
+        <ListBox x:Name="ItemList" AutomationProperties.Name="Items" />
+        <TextBlock x:Name="NoItems" Classes="hint" Margin="12" IsVisible="False" />
+      </Grid>
+    </DockPanel>
+
+    <!-- The selected item -->
+    <ScrollViewer Grid.Column="4" VerticalScrollBarVisibility="Auto">
+      <StackPanel Spacing="12" Margin="0,0,8,0">
+        <TextBlock x:Name="FormHeading" FontWeight="SemiBold" />
+        <TextBlock x:Name="KindHint" Classes="hint" />
+
+        <StackPanel Spacing="4">
+          <Label x:Name="KeyLabel" Target="{Binding #KeyBox}" Padding="0" />
+          <TextBox x:Name="KeyBox" FontFamily="Cascadia Mono,Consolas,Menlo,DejaVu Sans Mono,monospace" />
+          <TextBlock x:Name="KeyHint" Classes="hint" IsVisible="False" />
+        </StackPanel>
+
+        <StackPanel x:Name="ValuePane" Spacing="4">
+          <Label x:Name="ValueLabel" Target="{Binding #ValueBox}" Padding="0" />
+          <TextBox x:Name="ValueBox" AcceptsReturn="False" TextWrapping="Wrap" MinHeight="64"
+                   VerticalContentAlignment="Top"
+                   FontFamily="Cascadia Mono,Consolas,Menlo,DejaVu Sans Mono,monospace" />
+        </StackPanel>
+
+        <StackPanel x:Name="ExtraPane" Spacing="4">
+          <Label x:Name="ExtraLabel" Target="{Binding #ExtraBox}" Padding="0" />
+          <TextBox x:Name="ExtraBox" Width="120" HorizontalAlignment="Left" MaxLength="8" />
+          <TextBlock x:Name="ExtraHint" Classes="hint" />
+        </StackPanel>
+
+        <TextBlock x:Name="ErrorText" Classes="error" />
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Button x:Name="SaveButton" Classes="accent" Content="_Save" MinWidth="88" HorizontalContentAlignment="Center" />
+          <Button x:Name="RevertButton" Content="_Revert" MinWidth="88" HorizontalContentAlignment="Center" />
+        </StackPanel>
+      </StackPanel>
+    </ScrollViewer>
+
+    <Grid Grid.Row="1" Grid.ColumnSpan="5" ColumnDefinitions="*,Auto" Margin="0,16,0,0">
+      <TextBlock x:Name="FileHint" Grid.Column="0" Classes="hint" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
+      <Button x:Name="CloseButton" Grid.Column="1" Content="Close" IsCancel="True" MinWidth="88" HorizontalContentAlignment="Center" />
+    </Grid>
+  </Grid>
+</Window>

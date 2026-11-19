@@ -1,0 +1,53 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:controls="using:Comet.App.Controls"
+             x:Class="Comet.App.Views.SessionView">
+  <Grid RowDefinitions="*,Auto,Auto">
+
+    <!-- Output: scrollback on top, and a live tail below it while scrolled back. -->
+    <Grid Grid.Row="0" ColumnDefinitions="*,Auto" RowDefinitions="*,Auto">
+      <controls:OutputView x:Name="Output" Grid.Row="0" Grid.Column="0" />
+      <ScrollBar x:Name="Scroll" Grid.Row="0" Grid.Column="1" Orientation="Vertical"
+                 AllowAutoHide="False" AutomationProperties.Name="Scrollback position" />
+
+      <Border x:Name="TailPane" Grid.Row="1" Grid.ColumnSpan="2" IsVisible="False"
+              BorderThickness="0,2,0,0" BorderBrush="{DynamicResource SystemAccentColor}">
+        <Grid RowDefinitions="Auto,*">
+          <Border Grid.Row="0" Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}" Padding="8,2">
+            <Grid ColumnDefinitions="*,Auto">
+              <TextBlock Grid.Column="0" VerticalAlignment="Center" FontSize="12"
+                         Text="Scrolled back. New text appears below." />
+              <Button x:Name="JumpToBottom" Grid.Column="1" Content="Return to bottom (Esc)" FontSize="12" Padding="8,2" />
+            </Grid>
+          </Border>
+          <controls:OutputView x:Name="Tail" Grid.Row="1" AlwaysFollow="True" />
+        </Grid>
+      </Border>
+    </Grid>
+
+    <!-- Find bar -->
+    <Border x:Name="FindBar" Grid.Row="1" IsVisible="False" Padding="8,6"
+            Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
+      <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto,Auto">
+        <TextBlock Grid.Column="0" Classes="label" Text="Find" />
+        <TextBox x:Name="FindText" Grid.Column="1" PlaceholderText="Text to find in the output"
+                 AutomationProperties.Name="Find in output" />
+        <TextBlock x:Name="FindStatus" Grid.Column="2" VerticalAlignment="Center" Margin="10,0" />
+        <Button x:Name="FindPreviousButton" Grid.Column="3" Content="Previous" Margin="4,0,0,0" ToolTip.Tip="Search towards older text (Enter)" />
+        <Button x:Name="FindNextButton" Grid.Column="4" Content="Next" Margin="4,0,0,0" ToolTip.Tip="Search towards newer text (Shift+Enter)" />
+        <Button x:Name="FindClose" Grid.Column="5" Content="Close" Margin="4,0,0,0" ToolTip.Tip="Close the find bar (Esc)" />
+      </Grid>
+    </Border>
+
+    <!-- Input line -->
+    <Border Grid.Row="2" Padding="4" Background="{DynamicResource SystemControlBackgroundChromeMediumBrush}">
+      <Grid ColumnDefinitions="Auto,*">
+        <TextBlock x:Name="PasswordLabel" Grid.Column="0" Classes="label" Margin="6,0,8,0" IsVisible="False"
+                   Text="Password (hidden):" />
+        <TextBox x:Name="Input" Grid.Column="1" AcceptsReturn="False" AcceptsTab="False"
+                 AutomationProperties.Name="Command input"
+                 PlaceholderText="Type a command and press Enter" />
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

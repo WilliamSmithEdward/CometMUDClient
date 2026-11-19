@@ -1,8 +1,7 @@
 # Comet MUD Client
 
 A cross-platform MUD client for Windows, macOS and Linux, written in C# on .NET 10 with
-Avalonia. Its look and its scripting language follow the TinTin family of clients, WinTin.Net
-in particular.
+Avalonia.
 
 ## Build and test
 

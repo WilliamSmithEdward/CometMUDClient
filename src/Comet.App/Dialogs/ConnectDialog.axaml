@@ -1,0 +1,75 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Comet.App.Dialogs.ConnectDialog"
+        Title="New Connection"
+        Width="760" Height="600" MinWidth="620" MinHeight="460"
+        WindowStartupLocation="CenterOwner" ShowInTaskbar="False">
+  <Grid Margin="16" ColumnDefinitions="240,16,*" RowDefinitions="*,Auto">
+
+    <!-- Saved connections -->
+    <DockPanel Grid.Column="0" Grid.Row="0">
+      <TextBlock DockPanel.Dock="Top" Text="Saved connections" FontWeight="SemiBold" Margin="0,0,0,8" />
+      <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Spacing="8" Margin="0,8,0,0">
+        <Button x:Name="NewButton" Content="_New" MinWidth="72" HorizontalContentAlignment="Center" />
+        <Button x:Name="DeleteButton" Content="_Delete" MinWidth="72" HorizontalContentAlignment="Center" />
+      </StackPanel>
+      <Grid>
+        <ListBox x:Name="ProfileList" AutomationProperties.Name="Saved connections" />
+        <TextBlock x:Name="NoProfiles" Classes="hint" Margin="12" IsVisible="False"
+                   Text="No saved connections yet. Choose New to add one." />
+      </Grid>
+    </DockPanel>
+
+    <!-- Details -->
+    <ScrollViewer Grid.Column="2" Grid.Row="0" VerticalScrollBarVisibility="Auto">
+      <StackPanel x:Name="Form" Spacing="12" Margin="0,0,8,0">
+        <StackPanel Spacing="4">
+          <Label Target="{Binding #NameBox}" Content="Na_me" Padding="0" />
+          <TextBox x:Name="NameBox" PlaceholderText="Shown on the tab, for example My MUD" MaxLength="80" />
+        </StackPanel>
+
+        <Grid ColumnDefinitions="*,12,120">
+          <StackPanel Grid.Column="0" Spacing="4">
+            <Label Target="{Binding #HostBox}" Content="_Address (required)" Padding="0" />
+            <TextBox x:Name="HostBox" PlaceholderText="mud.example.org" MaxLength="253" />
+          </StackPanel>
+          <StackPanel Grid.Column="2" Spacing="4">
+            <Label Target="{Binding #PortBox}" Content="_Port (required)" Padding="0" />
+            <TextBox x:Name="PortBox" PlaceholderText="4000" MaxLength="5" />
+          </StackPanel>
+        </Grid>
+
+        <StackPanel Spacing="4">
+          <CheckBox x:Name="TlsBox" Content="Use an encrypted connection (_TLS)" />
+          <CheckBox x:Name="InvalidCertificateBox" Margin="24,0,0,0"
+                    Content="Accept a certificate that cannot be verified" />
+          <TextBlock Classes="hint" Margin="24,0,0,0"
+                     Text="Only for servers with a self-signed or expired certificate. The connection is still encrypted, but nothing proves it is the real server." />
+        </StackPanel>
+
+        <StackPanel Spacing="4">
+          <Label Target="{Binding #EncodingBox}" Content="Character _encoding" Padding="0" />
+          <ComboBox x:Name="EncodingBox" HorizontalAlignment="Stretch" />
+          <TextBlock Classes="hint" Text="Change this if accented letters or box-drawing characters look wrong." />
+        </StackPanel>
+
+        <CheckBox x:Name="ReconnectBox" Content="_Reconnect automatically when the connection drops" />
+
+        <StackPanel Spacing="4">
+          <Label Target="{Binding #NotesBox}" Content="N_otes" Padding="0" />
+          <TextBox x:Name="NotesBox" AcceptsReturn="True" TextWrapping="Wrap" Height="72" MaxLength="2000" />
+          <TextBlock Classes="hint" Text="Passwords are never saved. Type yours when the MUD asks for it." />
+        </StackPanel>
+      </StackPanel>
+    </ScrollViewer>
+
+    <!-- Buttons -->
+    <Grid Grid.Row="1" Grid.ColumnSpan="3" ColumnDefinitions="*,Auto" Margin="0,16,0,0">
+      <TextBlock x:Name="ErrorText" Grid.Column="0" Classes="error" VerticalAlignment="Center" Margin="0,0,16,0" />
+      <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8">
+        <Button x:Name="CloseButton" Content="Close" IsCancel="True" MinWidth="88" HorizontalContentAlignment="Center" />
+        <Button x:Name="ConnectButton" Classes="accent" Content="_Connect" IsDefault="True" MinWidth="88" HorizontalContentAlignment="Center" />
+      </StackPanel>
+    </Grid>
+  </Grid>
+</Window>

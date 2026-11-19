@@ -49,7 +49,7 @@ public sealed class AppSettings
     /// <summary>The 16 ANSI colors, normal then bright, as #RRGGBB.</summary>
     public static IReadOnlyList<string> DefaultPalette { get; } =
     [
-        "#000000", "#BB0000", "#00BB00", "#BBBB00", "#0000BB", "#BB00BB", "#00BBBB", "#BBBBBB",
+        "#000000", "#BB0000", "#00BB00", "#BBBB00", "#2472C8", "#BB00BB", "#00BBBB", "#BBBBBB",
         "#555555", "#FF5555", "#55FF55", "#FFFF55", "#5555FF", "#FF55FF", "#55FFFF", "#FFFFFF",
     ];
 

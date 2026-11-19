@@ -1,0 +1,54 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Comet.App.MainWindow"
+        Title="Comet"
+        Width="1000" Height="700" MinWidth="560" MinHeight="360">
+  <DockPanel>
+    <Menu x:Name="MainMenu" DockPanel.Dock="Top" />
+
+    <Border x:Name="ToolbarPane" DockPanel.Dock="Top" Padding="4,2"
+            BorderThickness="0,0,0,1" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+      <StackPanel x:Name="Toolbar" Orientation="Horizontal" Spacing="2" />
+    </Border>
+
+    <Border x:Name="WarningBar" DockPanel.Dock="Top" IsVisible="False" Padding="12,8"
+            Background="{DynamicResource SystemFillColorCautionBackgroundBrush}">
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock x:Name="WarningText" Grid.Column="0" TextWrapping="Wrap" VerticalAlignment="Center" />
+        <Button x:Name="WarningDismiss" Grid.Column="1" Content="Dismiss" Margin="12,0,0,0" />
+      </Grid>
+    </Border>
+
+    <Border x:Name="StatusPane" DockPanel.Dock="Bottom"
+            BorderThickness="0,1,0,0" BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}">
+      <Grid ColumnDefinitions="*,Auto,Auto,Auto,Auto,Auto,Auto">
+        <TextBlock x:Name="StatusText" Grid.Column="0" Margin="10,3" TextTrimming="CharacterEllipsis" />
+        <Border x:Name="Panel1" Grid.Column="1" Classes="statusPane" IsVisible="False"><TextBlock x:Name="Panel1Text" /></Border>
+        <Border x:Name="Panel2" Grid.Column="2" Classes="statusPane" IsVisible="False"><TextBlock x:Name="Panel2Text" /></Border>
+        <Border x:Name="Panel3" Grid.Column="3" Classes="statusPane" IsVisible="False"><TextBlock x:Name="Panel3Text" /></Border>
+        <Border x:Name="TickPane" Grid.Column="4" Classes="statusPane" IsVisible="False"
+                ToolTip.Tip="Seconds until the next tick"><TextBlock x:Name="TickText" /></Border>
+        <Border x:Name="LogPane" Grid.Column="5" Classes="statusPane" IsVisible="False"><TextBlock Text="Logging" FontWeight="SemiBold" /></Border>
+        <Border Grid.Column="6" Classes="statusPane"><TextBlock x:Name="ClockText" /></Border>
+      </Grid>
+    </Border>
+
+    <Grid>
+      <TabControl x:Name="Tabs" Padding="0" />
+
+      <ScrollViewer x:Name="EmptyState">
+        <StackPanel MaxWidth="520" Margin="24,48" Spacing="16" HorizontalAlignment="Center">
+          <TextBlock Classes="h1" Text="No session is open" />
+          <TextBlock TextWrapping="Wrap"
+                     Text="Connect to a MUD to start playing. Your saved connections appear here, and each one keeps its own aliases, actions and other scripts." />
+          <Button x:Name="EmptyConnect" Classes="accent" Content="New Connection..." Padding="16,8" />
+          <StackPanel x:Name="RecentPane" Spacing="8" IsVisible="False">
+            <TextBlock Text="Saved connections" FontWeight="SemiBold" Margin="0,12,0,0" />
+            <ListBox x:Name="RecentList" MaxHeight="280" AutomationProperties.Name="Saved connections" />
+            <TextBlock Classes="hint" Text="Double-click a connection, or select it and press Enter, to connect." />
+          </StackPanel>
+        </StackPanel>
+      </ScrollViewer>
+    </Grid>
+  </DockPanel>
+</Window>
