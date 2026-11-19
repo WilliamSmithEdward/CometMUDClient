@@ -36,6 +36,12 @@
           "Avalonia": "12.1.6"
         }
       },
+      "Velopack": {
+        "type": "Direct",
+        "requested": "[1.2.161, )",
+        "resolved": "1.2.161",
+        "contentHash": "OpHNacIumnkhaaX3ZlQ/TCR4YPOJvud2/PAOoWb6o+mIrLwIVA275I5wAgt4q/1O2VrJeDwR1qFQyqzG4lUArg=="
+      },
       "Avalonia.Angle.Windows.Natives": {
         "type": "Transitive",
         "resolved": "2.1.27548.20260419",
@@ -141,20 +147,6 @@
         "resolved": "0.11.6",
         "contentHash": "NdNWGDiZ6eS/Mf/9+QHR91cj1K7Hy+PX9yrHI/zM7xFYuj9IWT2uxtB6sCHjrnxAeLV9fut1R6zHDUGKX6f9lQ=="
       },
-      "SkiaSharp": {
-        "type": "Transitive",
-        "resolved": "3.119.4",
-        "contentHash": "53NOSUZ1Us+91Sm0uCkIivh/k7jOowRErZT2sIWwPFN9mLUvdxnE6rS4sWo4255+Rd2MWUSF+j0NMZHD6Cke+Q==",
-        "dependencies": {
-          "SkiaSharp.NativeAssets.Win32": "3.119.4",
-          "SkiaSharp.NativeAssets.macOS": "3.119.4"
-        }
-      },
-      "SkiaSharp.NativeAssets.Linux": {
-        "type": "Transitive",
-        "resolved": "3.119.4",
-        "contentHash": "UAyVzbqNfZsZbKbzj68zXLyUyF/SbTKmzTfOO6qDu++dtIUMMTzPBe8oOuzU/DiewpfKoUUlOSsJmqWc6blxBw=="
-      },
       "SkiaSharp.NativeAssets.macOS": {
         "type": "Transitive",
         "resolved": "3.119.4",
@@ -192,6 +184,22 @@
           "SkiaSharp.NativeAssets.Linux": "3.119.4",
           "SkiaSharp.NativeAssets.WebAssembly": "3.119.4"
         }
+      },
+      "SkiaSharp": {
+        "type": "CentralTransitive",
+        "requested": "[3.119.4, )",
+        "resolved": "3.119.4",
+        "contentHash": "53NOSUZ1Us+91Sm0uCkIivh/k7jOowRErZT2sIWwPFN9mLUvdxnE6rS4sWo4255+Rd2MWUSF+j0NMZHD6Cke+Q==",
+        "dependencies": {
+          "SkiaSharp.NativeAssets.Win32": "3.119.4",
+          "SkiaSharp.NativeAssets.macOS": "3.119.4"
+        }
+      },
+      "SkiaSharp.NativeAssets.Linux": {
+        "type": "CentralTransitive",
+        "requested": "[3.119.4, )",
+        "resolved": "3.119.4",
+        "contentHash": "UAyVzbqNfZsZbKbzj68zXLyUyF/SbTKmzTfOO6qDu++dtIUMMTzPBe8oOuzU/DiewpfKoUUlOSsJmqWc6blxBw=="
       }
     }
   }

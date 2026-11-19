@@ -33,6 +33,40 @@ To build a self-contained app for one platform (`win-x64`, `osx-arm64`, `linux-x
 dotnet publish src/Comet.App -c Release -r win-x64 --self-contained
 ```
 
+## Installers
+
+`build/package.ps1` publishes the app for one platform and builds its installer with
+[Velopack](https://velopack.io). It needs PowerShell 7 and the .NET SDK.
+
+```bash
+pwsh build/package.ps1 -Runtime win-x64
+```
+
+| Runtime | Build on | Result in `artifacts/installers/<runtime>` |
+| --- | --- | --- |
+| `win-x64`, `win-arm64` | any OS | `CometMudClient-<runtime>-Setup.exe` and a portable zip |
+| `osx-arm64`, `osx-x64` | macOS only | a `.pkg` installer and a portable zip |
+| `linux-x64`, `linux-arm64` | any OS | an AppImage |
+
+The Windows installer is per-user: it installs to `%LocalAppData%\CometMudClient` without
+administrator rights and adds Start menu and desktop shortcuts.
+
+The Package workflow builds all three on every push to `main` and keeps them as workflow
+artifacts for 14 days. Pushing a tag such as `v0.2.0` also attaches them to a draft GitHub
+release, which is published by hand.
+
+The installers are not code-signed. Until a certificate is configured, Windows SmartScreen
+warns before running the setup, and macOS refuses to open the app unless the user allows it
+in System Settings > Privacy & Security. On Linux, mark the AppImage executable
+(`chmod +x`) and run it.
+
+The icon files in `src/Comet.App/Assets` are drawn by code. To change the artwork, edit
+`tools/IconGenerator` and run it:
+
+```bash
+dotnet run --project tools/IconGenerator
+```
+
 ## Build and test
 
 ```bash

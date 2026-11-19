@@ -186,20 +186,6 @@
           "Microsoft.TestPlatform.ObjectModel": "18.11.0"
         }
       },
-      "SkiaSharp": {
-        "type": "Transitive",
-        "resolved": "3.119.4",
-        "contentHash": "53NOSUZ1Us+91Sm0uCkIivh/k7jOowRErZT2sIWwPFN9mLUvdxnE6rS4sWo4255+Rd2MWUSF+j0NMZHD6Cke+Q==",
-        "dependencies": {
-          "SkiaSharp.NativeAssets.Win32": "3.119.4",
-          "SkiaSharp.NativeAssets.macOS": "3.119.4"
-        }
-      },
-      "SkiaSharp.NativeAssets.Linux": {
-        "type": "Transitive",
-        "resolved": "3.119.4",
-        "contentHash": "UAyVzbqNfZsZbKbzj68zXLyUyF/SbTKmzTfOO6qDu++dtIUMMTzPBe8oOuzU/DiewpfKoUUlOSsJmqWc6blxBw=="
-      },
       "SkiaSharp.NativeAssets.macOS": {
         "type": "Transitive",
         "resolved": "3.119.4",
@@ -266,7 +252,8 @@
           "Avalonia": "[12.1.6, )",
           "Avalonia.Desktop": "[12.1.6, )",
           "Avalonia.Themes.Fluent": "[12.1.6, )",
-          "Comet.Core": "[0.1.0, )"
+          "Comet.Core": "[0.1.0, )",
+          "Velopack": "[1.2.161, )"
         }
       },
       "comet.core": {
@@ -305,6 +292,28 @@
         "dependencies": {
           "Avalonia": "12.1.6"
         }
+      },
+      "SkiaSharp": {
+        "type": "CentralTransitive",
+        "requested": "[3.119.4, )",
+        "resolved": "3.119.4",
+        "contentHash": "53NOSUZ1Us+91Sm0uCkIivh/k7jOowRErZT2sIWwPFN9mLUvdxnE6rS4sWo4255+Rd2MWUSF+j0NMZHD6Cke+Q==",
+        "dependencies": {
+          "SkiaSharp.NativeAssets.Win32": "3.119.4",
+          "SkiaSharp.NativeAssets.macOS": "3.119.4"
+        }
+      },
+      "SkiaSharp.NativeAssets.Linux": {
+        "type": "CentralTransitive",
+        "requested": "[3.119.4, )",
+        "resolved": "3.119.4",
+        "contentHash": "UAyVzbqNfZsZbKbzj68zXLyUyF/SbTKmzTfOO6qDu++dtIUMMTzPBe8oOuzU/DiewpfKoUUlOSsJmqWc6blxBw=="
+      },
+      "Velopack": {
+        "type": "CentralTransitive",
+        "requested": "[1.2.161, )",
+        "resolved": "1.2.161",
+        "contentHash": "OpHNacIumnkhaaX3ZlQ/TCR4YPOJvud2/PAOoWb6o+mIrLwIVA275I5wAgt4q/1O2VrJeDwR1qFQyqzG4lUArg=="
       }
     }
   }

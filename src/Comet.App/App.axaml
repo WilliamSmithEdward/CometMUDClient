@@ -6,6 +6,9 @@
   <Application.Styles>
     <FluentTheme DensityStyle="Compact" />
 
+    <Style Selector=":is(Window)">
+      <Setter Property="Icon" Value="/Assets/comet.ico" />
+    </Style>
     <Style Selector="TabItem">
       <Setter Property="FontSize" Value="14" />
       <Setter Property="MinHeight" Value="32" />
