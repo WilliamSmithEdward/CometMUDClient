@@ -35,7 +35,7 @@ public sealed class AboutDialog : Window
                 new TextBlock
                 {
                     TextWrapping = TextWrapping.Wrap,
-                    Text = "A cross-platform MUD client with TinTin-style aliases, actions, highlights and scripting.",
+                    Text = "A cross-platform MUD client with aliases, actions, highlights and scripting.",
                 },
                 new SelectableTextBlock
                 {

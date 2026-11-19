@@ -576,7 +576,7 @@ public sealed partial class MainWindow : Window
         await Task.CompletedTask.ConfigureAwait(true);
     }
 
-    private static readonly FilePickerFileType ScriptFileType = new("TinTin scripts") { Patterns = ["*.tin", "*.txt", "*.ws"] };
+    private static readonly FilePickerFileType ScriptFileType = new("Script files") { Patterns = ["*.tin", "*.txt", "*.ws"] };
     private static readonly FilePickerFileType LogFileType = new("Log files") { Patterns = ["*.log", "*.txt"] };
 
     private async Task LoadScriptAsync()
